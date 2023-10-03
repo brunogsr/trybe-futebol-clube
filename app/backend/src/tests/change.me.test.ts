@@ -32,15 +32,22 @@ describe('Testa a rota /teams', function () {
     stub.restore();
   });
   it('Testa findById "/teams/:id"', async function () {
-    const buildStub = Team.build(allTeamsMocha[0]); // para criar um objeto com base em uma classe, usa-se o método build
-    //                                                  para criar um array de objetos com base em uma classe, usa-se o método bulkBuild
-    
+    const buildStub = Team.build(allTeamsMocha[0]);
     const stub = sinon.stub(Team, 'findByPk').resolves(buildStub);
 
     const res = await chai.request(app).get('/teams/1').send();
     
     expect(res.status).to.equal(200);
     expect(res.body).to.deep.equal(buildStub.toJSON());
+    stub.restore();
+  });
+  it('Testa findById "/teams/:id" com id inexistente', async function () {
+    const stub = sinon.stub(Team, 'findByPk').resolves(null);
+
+    const res = await chai.request(app).get('/teams/1').send();
+    
+    expect(res.status).to.equal(404);
+    expect(res.body).to.deep.equal({ message: 'Time não encontrado' });
     stub.restore();
   });
 });
