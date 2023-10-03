@@ -14,7 +14,7 @@ describe('Testa a rota GET /teams', function () {
   beforeEach(function () {
     sinon.restore();
   });
-  it('Testa rota post "/teams"', async function () {
+  it('Testa rota GET "/teams"', async function () {
     const buildStub = Team.bulkBuild(allTeamsMocha); // para criar um objeto com base em uma classe, usa-se o método build
     //                                                  para criar um array de objetos com base em uma classe, usa-se o método bulkBuild
     
@@ -22,7 +22,7 @@ describe('Testa a rota GET /teams', function () {
 
     const res = await chai.request(app).post('/teams').send();
     
-    expect(res.status).to.equal(201);
+    expect(res.status).to.equal(200);
     expect(res.body).to.deep.equal(buildStub);
     stub.restore();
   });  
