@@ -1,8 +1,9 @@
+import { ModelStatic } from 'sequelize';
 import { ITeam, ITeamModel } from '../Interfaces/ITeamModel';
 import Team from '../database/models/team.model';
 
 export default class TeamModel implements ITeamModel {
-  private teamModel = Team;
+  constructor(private teamModel: ModelStatic<Team> = Team) {}
 
   public async findAll(): Promise<ITeam[]> {
     const allTeams = await this.teamModel.findAll();
