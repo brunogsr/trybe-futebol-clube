@@ -1,10 +1,11 @@
 type ErrorType = { [key:string]: number };
 
 const errorType: ErrorType = {
-  'string.email': 422,
-  'number.min': 422,
-  'string.min': 422,
-  'string.base': 422,
+  'string.empty': 400,
+  'string.email': 400,
+  'number.min': 400,
+  'string.min': 400,
+  'string.base': 400,
   'any.required': 400,
 };
 

@@ -7,6 +7,8 @@ const validateLogin = (req: Request, res: Response, next: NextFunction) => {
   const { error } = loginSchema.validate(body);
   if (error) {
     const { details } = error;
+    console.log(details);
+
     const statusCode = errorMap(details[0].type);
     return res.status(statusCode).json({ message: 'All fields must be filled' });
   }
