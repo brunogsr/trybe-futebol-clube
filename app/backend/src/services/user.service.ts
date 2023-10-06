@@ -12,10 +12,10 @@ export default class UserService {
     password: IUser['password'],
   ): Promise<ServiceResponse<IUser | { token: string }>> {
     const user = await this.userModel.login(email);
-    if (!user) return { status: 'UNAUTHORIZED', data: { message: 'Usuário não encontrado' } };
+    if (!user) return { status: 'UNAUTHORIZED', data: { message: 'All fields must be filled' } };
     const validPassword = await Bcrypt.compare(password, user.password);
     if (!validPassword) {
-      return { status: 'UNAUTHORIZED', data: { message: 'Senha inválida' } };
+      return { status: 'UNAUTHORIZED', data: { message: 'Invalid email or password' } };
     }
     const { password: _, ...userWithoutPassword } = user;
     const token = Token.generateToken(userWithoutPassword);
