@@ -8,6 +8,6 @@ export default class UserController {
     const { email, password } = req.body;
     const { status, data } = await this.userService.login(email, password);
     if (status === 'UNAUTHORIZED') return res.status(400).json(data);
-    return res.status(200).json(data);
+    return res.status(200).json(data); //
   }
 }
