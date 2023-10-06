@@ -1,0 +1,13 @@
+import { Request, Response } from 'express';
+import UserService from '../services/user.service';
+
+export default class UserController {
+  constructor(private userService = new UserService()) {}
+
+  public async login(req: Request, res: Response) {
+    const { email, password } = req.body;
+    const { status, data } = await this.userService.login(email, password);
+    if (status === 'NOT_FOUND') return res.status(401).json(data);
+    res.status(200).json(data);
+  }
+}
