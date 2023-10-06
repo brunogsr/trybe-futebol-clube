@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import errorMap from './errors';
 import loginSchema from './loginSchema';
 
-const validateProduct = (req: Request, res: Response, next: NextFunction) => {
+const validateLogin = (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
   const { error } = loginSchema.validate(body);
   if (error) {
@@ -14,4 +14,4 @@ const validateProduct = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export default validateProduct;
+export default validateLogin;
