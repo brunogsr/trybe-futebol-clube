@@ -22,4 +22,11 @@ export default class UserService {
 
     return { status: 'SUCCESSFUL', data: { token } };
   }
+
+  // public async getRole(authorization: string): Promise<ServiceResponse<IUser['role']>> {
+  //   const payload = Token.verifyToken(authorization);
+  //   if (!payload) return { status: 'UNAUTHORIZED', data: { message: 'Expired or invalid token' } };
+  //   const { role } = payload;
+  //   return { status: 'SUCCESSFUL', data: role };
+  // }
 }

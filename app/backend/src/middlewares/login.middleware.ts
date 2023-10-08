@@ -5,10 +5,12 @@ import loginSchema from './loginSchema';
 const validateLogin = (req: Request, res: Response, next: NextFunction) => {
   const { body } = req;
   const { error } = loginSchema.validate(body);
+  console.log(error);
+
   if (error) {
     const { details } = error;
     const [{ type }] = details;
-    console.log(details);
+    // console.log(details);
 
     if (type === 'string.email' || type === 'string.min') {
       return res.status(401).json({ message: 'Invalid email or password' });
@@ -19,4 +21,6 @@ const validateLogin = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export default validateLogin;
+export default {
+  validateLogin,
+};
