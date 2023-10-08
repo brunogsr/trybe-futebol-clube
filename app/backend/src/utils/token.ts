@@ -17,8 +17,11 @@ export default class Token {
   }
 
   static verifyToken(payload: string) {
-    const token = jwt.verify(payload, Token.secret);
-    if (!token) return null;
-    return token;
+    try {
+      const token = jwt.verify(payload, Token.secret);
+      return token;
+    } catch (error) {
+      return null;
+    }
   }
 }
