@@ -22,8 +22,11 @@ export default class MatchesModel implements IMatchesModel {
 
   public async updateFinishProgress(id: number): Promise<object | null> {
     const match = await this.matchesModel.findByPk(id);
+    // console.log(match);
     if (!match) return null;
     await match.update({ inProgress: false });
+    // console.log(match);
+
     return { message: 'Finished' };
   }
 

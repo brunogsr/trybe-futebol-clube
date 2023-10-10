@@ -7,7 +7,7 @@ interface IUser {
 }
 
 interface IUserModel {
-  login(email: IUser['email']): Promise<IUser | null>
+  login(email: IUser['email'], password: IUser['password']): Promise<IUser | null>
 }
 
 export {
