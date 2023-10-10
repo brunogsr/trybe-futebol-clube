@@ -15,9 +15,20 @@ export default class MatchesController {
     return res.status(200).json(data);
   }
 
+  public async updateFinishProgress(req: Request, res: Response) {
+    const { id } = req.params;
+    const { data } = await this.matchesService.updateFinishProgress(Number(id));
+    return res.status(200).json(data);
+  }
+
   public async updateInProgress(req: Request, res: Response) {
     const { id } = req.params;
-    const { data } = await this.matchesService.updateInProgress(Number(id));
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+    const { data } = await this.matchesService.updateInProgress(
+      Number(id),
+      homeTeamGoals,
+      awayTeamGoals,
+    );
     return res.status(200).json(data);
   }
 }

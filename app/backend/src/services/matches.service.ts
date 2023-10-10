@@ -15,9 +15,15 @@ export default class MatchesService {
     return { status: 'SUCCESSFUL', data: allMatches };
   }
 
-  public async updateInProgress(id: number):
+  public async updateFinishProgress(id: number):
   Promise<ServiceResponse<object | null>> {
-    const match = await this.matchesModel.updateInProgress(id);
+    const match = await this.matchesModel.updateFinishProgress(id);
+    return { status: 'SUCCESSFUL', data: match };
+  }
+
+  public async updateInProgress(id: number, homeTeamGoals: number, awayTeamGoals: number):
+  Promise<ServiceResponse<object | null>> {
+    const match = await this.matchesModel.updateInProgress(id, homeTeamGoals, awayTeamGoals);
     return { status: 'SUCCESSFUL', data: match };
   }
 }

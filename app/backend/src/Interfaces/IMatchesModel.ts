@@ -9,7 +9,7 @@ interface IMatches {
 
 interface IMatchesModel {
   findAll(inProgress?: boolean): Promise<IMatches[]>
-  updateInProgress(id: number, inProgress: boolean): Promise< object | null>
+  updateFinishProgress(id: number, inProgress: boolean): Promise< object | null>
 }
 //
 export {

@@ -20,10 +20,27 @@ export default class MatchesModel implements IMatchesModel {
     return allMatchesJSON;
   }
 
-  public async updateInProgress(id: number): Promise<object | null> {
+  public async updateFinishProgress(id: number): Promise<object | null> {
     const match = await this.matchesModel.findByPk(id);
     if (!match) return null;
     await match.update({ inProgress: false });
     return { message: 'Finished' };
+  }
+
+  public async updateInProgress(
+    id: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ): Promise<object | null> {
+    const [match] = await this.matchesModel.findAll({
+      where: { id },
+      include: [
+        { model: Team, as: 'homeTeam', attributes: ['teamName'] },
+        { model: Team, as: 'awayTeam', attributes: ['teamName'] },
+      ],
+    });
+    if (!match) return null;
+    await match.update({ homeTeamGoals, awayTeamGoals });
+    return { homeTeamGoals, awayTeamGoals };
   }
 }

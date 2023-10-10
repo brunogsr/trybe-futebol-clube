@@ -14,6 +14,12 @@ router.get(
 router.patch(
   '/:id/finish',
   middlewareToken.validateToken,
+  (req: Request, res: Response) => matchesController.updateFinishProgress(req, res),
+);
+
+router.patch(
+  '/:id',
+  middlewareToken.validateToken,
   (req: Request, res: Response) => matchesController.updateInProgress(req, res),
 );
 
