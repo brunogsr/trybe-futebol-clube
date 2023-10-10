@@ -16,8 +16,14 @@ export default class MatchesModel implements IMatchesModel {
         { model: Team, as: 'awayTeam', attributes: ['teamName'] },
       ],
     });
-
     const allMatchesJSON = allMatches.map((team) => team.toJSON());
     return allMatchesJSON;
+  }
+
+  public async updateInProgress(id: number): Promise<object | null> {
+    const match = await this.matchesModel.findByPk(id);
+    if (!match) return null;
+    await match.update({ inProgress: false });
+    return { message: 'Finished' };
   }
 }
