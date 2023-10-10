@@ -8,7 +8,7 @@ interface IMatches {
 }
 
 interface IMatchesModel {
-  findAll(): Promise<IMatches[]>
+  findAll(inProgress?: boolean): Promise<IMatches[]>
   // findById(id: IMatches['id']): Promise<IMatches | null>
 }
 

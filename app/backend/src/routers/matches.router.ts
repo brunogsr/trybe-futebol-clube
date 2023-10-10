@@ -8,8 +8,7 @@ const router = Router();
 
 router.get(
   '/',
-  (_req:Request, res: Response) => matchesController.getAll(_req, res),
+  (req:Request, res: Response) => matchesController.getAll(req, res),
 );
-// router.get('/:id', (req: Request, res: Response) => matchesController.getById(req, res));
 
 export default router;

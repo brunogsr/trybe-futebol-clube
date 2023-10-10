@@ -6,21 +6,18 @@ import Team from '../database/models/team.model';
 export default class MatchesModel implements IMatchesModel {
   constructor(private matchesModel: ModelStatic<Matches> = Matches) {}
 
-  public async findAll(): Promise<IMatches[]> {
+  public async findAll(inProgress?: boolean): Promise<IMatches[]> {
+    const ifInProgressExists = inProgress === true || inProgress === false ? { inProgress } : {};
+
     const allMatches = await this.matchesModel.findAll({
+      where: ifInProgressExists,
       include: [
         { model: Team, as: 'homeTeam', attributes: ['teamName'] },
         { model: Team, as: 'awayTeam', attributes: ['teamName'] },
       ],
     });
+
     const allMatchesJSON = allMatches.map((team) => team.toJSON());
     return allMatchesJSON;
   }
-
-  // public async findById(id: IMatches['id']): Promise<IMatches | null> {
-  //   const team = await this.matchesModel.findByPk(id);
-  //   if (!team) return null;
-  //   const teamJSON = team.toJSON();
-  //   return teamJSON;
-  // }
 }
