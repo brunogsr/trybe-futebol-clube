@@ -1,4 +1,5 @@
 import { Router, Request, Response } from 'express';
+import validateMatches from '../middlewares/matches.middleware';
 import middlewareToken from '../middlewares/token.middleware';
 import MatchesController from '../controllers/matches.controller';
 
@@ -21,6 +22,13 @@ router.patch(
   '/:id',
   middlewareToken.validateToken,
   (req: Request, res: Response) => matchesController.updateInProgress(req, res),
+);
+
+router.post(
+  '/',
+  middlewareToken.validateToken,
+  validateMatches,
+  (req: Request, res: Response) => matchesController.createMatch(req, res),
 );
 
 export default router;

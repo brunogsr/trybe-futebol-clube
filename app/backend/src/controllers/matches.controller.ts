@@ -31,4 +31,10 @@ export default class MatchesController {
     );
     return res.status(200).json(data);
   }
+
+  public async createMatch(req: Request, res: Response) {
+    const { body } = req;
+    const { data } = await this.matchesService.createMatch({ ...body, inProgress: true });
+    return res.status(201).json(data);
+  }
 }

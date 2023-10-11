@@ -46,4 +46,9 @@ export default class MatchesModel implements IMatchesModel {
     await match.update({ homeTeamGoals, awayTeamGoals });
     return { homeTeamGoals, awayTeamGoals };
   }
+
+  public async createMatch(newMatch: IMatches): Promise<object | null> {
+    const match = await this.matchesModel.create(newMatch);
+    return match;
+  }
 }
