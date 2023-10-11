@@ -34,7 +34,8 @@ export default class MatchesController {
 
   public async createMatch(req: Request, res: Response) {
     const { body } = req;
-    const { data } = await this.matchesService.createMatch({ ...body, inProgress: true });
+    const { status, data } = await this.matchesService.createMatch({ ...body, inProgress: true });
+    if (status === 'NOT_FOUND') return res.status(404).json(data);
     return res.status(201).json(data);
   }
 }
