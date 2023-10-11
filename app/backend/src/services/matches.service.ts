@@ -32,7 +32,6 @@ export default class MatchesService {
     const teamModel = new TeamModel();
     const homeTeam = await teamModel.findById(newMatch.homeTeamId);
     const awayTeam = await teamModel.findById(newMatch.awayTeamId);
-    console.log(homeTeam, awayTeam, 'AQUIIIIIIIIII');
     if (!homeTeam || !awayTeam) {
       return { status: 'NOT_FOUND', data: { message: 'There is no team with such id!' } };
     }
