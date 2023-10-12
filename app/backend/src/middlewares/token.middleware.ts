@@ -15,6 +15,4 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export default {
-  validateToken,
-};
+export default { validateToken };

@@ -1,6 +1,12 @@
+import { IMatches } from './IMatchesModel';
+
 interface ITeam {
   id: number,
   teamName: string,
+}
+
+interface ITeamWithMatches extends ITeam {
+  homeTeam: IMatches[]
 }
 
 interface ITeamModel {
@@ -11,4 +17,5 @@ interface ITeamModel {
 export {
   ITeam,
   ITeamModel,
+  ITeamWithMatches,
 };

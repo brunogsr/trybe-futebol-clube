@@ -1,6 +1,7 @@
 import { ModelStatic } from 'sequelize';
 import { ITeam, ITeamModel } from '../Interfaces/ITeamModel';
 import Team from '../database/models/team.model';
+import Matches from '../database/models/matches.model';
 
 export default class TeamModel implements ITeamModel {
   constructor(private teamModel: ModelStatic<Team> = Team) {}
@@ -16,5 +17,16 @@ export default class TeamModel implements ITeamModel {
     if (!team) return null;
     const teamJSON = team.toJSON();
     return teamJSON;
+  }
+
+  public async getTeamsWithMatches(): Promise<ITeam[]> {
+    const allTeams = await this.teamModel.findAll({
+      include: [
+        { model: Matches, as: 'homeTeam', where: { inProgress: false } },
+        { model: Matches, as: 'awayTeam', where: { inProgress: false } },
+      ],
+    });
+    const allTeamsJSON = allTeams.map((team) => team.toJSON());
+    return allTeamsJSON;
   }
 }
