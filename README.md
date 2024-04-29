@@ -18,3 +18,15 @@
 
 </details>
 
+## Rodando o projeto
+Para rodar o projeto utilizando docker, no diretório da aplicação execute o comando:
+
+`docker-compose up -d`
+ou
+`npm run compose:up`
+
+Para acompanhar os logs do container do servidor backend, com nodemon já em execução:
+
+`docker logs -n 90 -f app_backend`
+ou
+`npm run logs backend`
